@@ -1,0 +1,14 @@
+CREATE KEYSPACE Student WITH replication = {'class':'SimpleStrategy','replication_factor':3};
+cqlsh> USE Student;
+
+
+cqlsh:student> CREATE COLUMNFAMILY Student_info(Student_Id INT PRIMARY KEY,Student_Name VARCHAR,Date_of_joining VARCHAR,Semester INT,Dept_Name VARCHAR);
+
+
+cqlsh:student> BEGIN BATCH INSERT INTO Student_info(Student_Id,Student_Name,Date_of_joining,Semester,Dept_Name) values(1,'Ajit','15/08/2010',7,'CSE'); INSERT INTO Student_info
+(Student_Id,Student_Name,Date_of_joining,Semester,Dept_Name) values(2,'Ravi','15/08/2009',7,'CSE'); APPLY BATCH;
+cqlsh:student> SELECT * FROM Student_info;
+
+
+cqlsh:student> UPDATE student.Student_info SET Dept_Name='ECE' WHERE Student_Id=2;
+cqlsh:student> SELECT * FROM Student_info;
